@@ -6,12 +6,11 @@ everything in this repo through conversation.
 ## 1. Install Cortex Code Desktop
 
 1. Go to Snowflake's official documentation for Cortex Code and download the desktop app
-   for your OS. (Search Snowflake docs for "Cortex Code" — always install from the
-   official Snowflake source, not a third party.)
+   for your OS. https://www.snowflake.com/en/product/snowflake-coco/downloads/
 2. Install and launch it.
 
-> Tip: you can ask CoCo itself "how do I update Cortex Code to the latest version?" once
-> it's running.
+> Tip: you can share this github with CoCo once
+> it's running to give it the context of the project.
 
 ## 2. Make sure you have the Snowflake CLI
 
@@ -43,7 +42,7 @@ snow connection add
 #   Role / Warehouse / Database / Schema: set to your sandbox once you have it (docs/02)
 ```
 
-### Generating a key pair (if you don't have one)
+### Generating a key pair (if needed for your organizations login practices if you don't have one)
 
 ```bash
 # private key (encrypted) + public key
