@@ -48,6 +48,3 @@ GROUP BY MOVIE_ID;
 Volume does most of the predictive work; net intent is weak alone but nearly independent of
 volume, so it stacks additively. See `docs/06_model_overview.md`.
 
-## Privacy & compliance
-- **Always pseudonymize handles.** Never store raw usernames or PII.
-- Keep raw pulls out of git (`data/` is ignored). Don't reshare comment data.
