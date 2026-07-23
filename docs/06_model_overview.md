@@ -49,9 +49,7 @@ pedigree shouldn't rescue the prediction.
 
 ## Leakage watch
 
-Exclude any feature contaminated by post-announcement or post-release activity — notably a
-third-party "popularity" score that co-moves with the outcome (Source E). It inflates
-offline metrics and collapses in honest forward validation.
+Exclude any feature contaminated by post-announcement or post-release activity — notably things like screen count which can change up to opening weekend and reflect expectations of the buyers and distributors which may or may not be warranted when final numbers are released. 
 
 ## Build it with CoCo
 
