@@ -7,7 +7,7 @@
 
 USE SCHEMA {{SANDBOX_DB}}.RESEARCH;
 
--- Option 1: classification + sentiment via AI_CLASSIFY / SENTIMENT ------------
+-- Option 1: classification + sentiment via AI_CLASSIFY / AI_SENTIMENT ---------
 -- Score each raw comment into a single intent label and a sentiment score, then
 -- pivot the label into the 1/0 intent flags the feature view expects.
 
@@ -20,7 +20,7 @@ WITH scored AS (
         r.COMMENT_ID,
         r.COMMENT_TEXT,
         r.LIKE_COUNT,
-        SNOWFLAKE.CORTEX.SENTIMENT(r.COMMENT_TEXT)                       AS sent_score,
+        AI_SENTIMENT(r.COMMENT_TEXT):categories[0]:sentiment::STRING    AS sent_label,
         AI_CLASSIFY(
             r.COMMENT_TEXT,
             ['theatrical','streaming','pass','other']
@@ -33,10 +33,9 @@ SELECT
     COMMENT_ID,
     COMMENT_TEXT,
     LIKE_COUNT,
-    sent_score,
-    CASE WHEN sent_score >  0.25 THEN 'positive'
-         WHEN sent_score < -0.25 THEN 'negative'
-         ELSE 'neutral' END                                             AS SENTIMENT_BUCKET,
+    -- AI_SENTIMENT returns a label; map it to a numeric score the feature view can average
+    CASE sent_label WHEN 'positive' THEN 1 WHEN 'negative' THEN -1 ELSE 0 END AS SENTIMENT_SCORE,
+    sent_label                                                              AS SENTIMENT_BUCKET,
     IFF(intent_label = 'theatrical', 1, 0)                              AS THEATRICAL_INTENT,
     IFF(intent_label = 'streaming',  1, 0)                              AS STREAMING_INTENT,
     IFF(intent_label = 'pass',       1, 0)                              AS PASS_INTENT
@@ -45,7 +44,7 @@ FROM scored;
 -- Option 2 (alternative): one AI_COMPLETE call returning structured JSON -------
 -- Useful if you want sentiment + intent + a rationale in a single pass. Ask CoCo
 -- to generate a version using AI_COMPLETE with a JSON response schema, e.g.:
---   {"sentiment": -1..1, "intent": "theatrical|streaming|pass|other"}
+--   {"sentiment": "positive|negative|neutral|mixed", "intent": "theatrical|streaming|pass|other"}
 -- then parse the JSON into the same columns as above.
 
 -- Per-film aggregate the feature view will read (sanity check):
