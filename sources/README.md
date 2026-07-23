@@ -1,30 +1,32 @@
 # Data source dossiers
 
-The files in this folder describe each signal the pipeline uses — **without naming the
-provider**. That's deliberate. Data-provider identities and their data are not ours to
-redistribute, and some providers restrict how their data may be accessed.
+The files in this folder describe each signal the pipeline uses **by its characteristics**,
+rather than prescribing one provider. Teams differ in the data access, budget, and terms
+they have, and some providers restrict how their data may be accessed — so the kit stays
+provider-neutral and helps you research the option that fits, under your own access.
 
-Instead, each dossier is a **fingerprint**: what the signal is, how it behaves, how it's
-typically accessed, its quirks and gotchas, and the schema columns it feeds. That's enough
-for Cortex Code to identify the most likely real source when you ask — and then to help
-you set it up against **your own** access.
+Each dossier is a **fingerprint**: what the signal is, how it behaves, how it's typically
+accessed, its quirks and gotchas, and the schema columns it feeds. That's enough for Cortex
+Code to help you research the most likely real sources when you ask — and then to set up the
+one you choose against **your own** access.
 
-## The unmask pattern
+## The research pattern
 
 Open the repo in Cortex Code and ask, for any dossier:
 
-> "Read `sources/source_A_search_interest.md`. Based on this fingerprint, what public data
-> source and Python client library is this most likely describing? How would I obtain
-> access, and what's the smallest first pull to validate it?"
+> "Read `sources/source_A_search_interest.md`. Based on these characteristics, what public
+> data sources and Python client libraries could I use? Compare the options, then help me
+> obtain access and do the smallest first pull to validate the one I pick."
 
-CoCo will name the likely source, the access method, and the client, then walk you through
-setup. Repeat per source. The full prompt set is in `../prompts/coco_prompt_library.md`.
+CoCo will suggest the likely options, the access method, and the client, then walk you
+through setup. Repeat per source. The full prompt set is in `../prompts/coco_prompt_library.md`.
 
-## Why oblique instead of just listing them?
+## Why dossiers instead of a fixed list?
 
-- It keeps provider names and any implied endorsement out of a public repo.
-- It forces a moment of due diligence: when CoCo names a source, **you** confirm its
-  current Terms of Service and access rules before ingesting. Fingerprints age; ToS change.
+- It keeps the kit **provider-neutral** — you choose the source that fits your access,
+  budget, and terms, and nothing here implies an endorsement of any provider.
+- It builds in a moment of due diligence: when CoCo suggests a source, **you** confirm its
+  current Terms of Service and access rules before ingesting. Signals age; ToS change.
 
 ## The five signals
 

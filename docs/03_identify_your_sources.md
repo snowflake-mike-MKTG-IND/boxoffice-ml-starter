@@ -1,17 +1,18 @@
-# 03 — Identify your data sources (with CoCo)
+# 03 — Research and choose your data sources (with CoCo)
 
-The repo describes each signal obliquely, on purpose (see `sources/README.md`). This page
-is the guided flow to turn those fingerprints into named, set-up sources — using Cortex
-Code as your research partner.
+The `sources/` dossiers describe each signal by its characteristics rather than prescribing
+one provider (see `sources/README.md`), because the right source depends on your access,
+budget, and terms. This page is the guided flow to research the best-fitting source for each
+signal and set it up — using Cortex Code as your research partner.
 
 ## The loop, per source
 
 1. Open the dossier (`sources/source_X_*.md`) in Cortex Code.
-2. Ask CoCo to **identify** it from the fingerprint.
+2. Ask CoCo to **research which provider(s) fit**, from the signal's characteristics.
 3. **You confirm** the current Terms of Service and access rules before ingesting.
 4. Ask CoCo to help you do the **smallest validated first pull**, then load it.
 
-## Unmask prompts (copy-paste)
+## Research prompts (copy-paste)
 
 **Source A — search interest**
 > "Read `sources/source_A_search_interest.md`. Based on this fingerprint — a free 0–100

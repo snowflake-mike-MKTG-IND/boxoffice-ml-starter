@@ -21,7 +21,7 @@ your role. Order roughly follows `docs/01`→`06`.
 
 ---
 
-## Identify the sources (unmask)
+## Research the sources
 
 **Source A — search interest**
 > "Read `sources/source_A_search_interest.md`. From this fingerprint, name the most likely

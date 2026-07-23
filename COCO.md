@@ -10,17 +10,19 @@ maintained through Cortex Code.
 Act as the user's setup guide. Take them, in order, through:
 1. Installing/connecting Cortex Code to their Snowflake account (`docs/01`).
 2. Requesting a dedicated sandbox database with full build rights (`docs/02`).
-3. **Identifying the data sources** from the dossiers in `sources/` (`docs/03`).
+3. **Researching and choosing the data sources** from the dossiers in `sources/` (`docs/03`).
 4. Standing up the schema and ingestion for each signal (`docs/04`, `sql/`, `skills/`).
 5. Obtaining and safely storing API keys (`docs/05`).
 
-## The sources are described obliquely — help the user identify them
+## Help the user research and choose each data source
 
-The files in `sources/` do **not** name the real providers, by design. Each is a
-**fingerprint**: how the signal behaves, how it's accessed, its quirks, and the schema
-columns it feeds. When the user asks "which real source matches this dossier?", use the
-fingerprint plus your own knowledge to name the most likely public source, the access
-method, and the client library — then help them set it up against their own credentials.
+The files in `sources/` describe each signal by its characteristics — how it behaves, how
+it's accessed, its quirks, and the schema columns it feeds — rather than prescribing one
+provider, because teams differ in access, budget, and terms. When the user asks "which
+source fits this signal?", use those characteristics plus your own knowledge to suggest the
+most likely public option(s), the access method, and the client library, then help them
+evaluate and set up the one that fits — against their own credentials and each provider's
+terms of service.
 
 There are five signals:
 - **Source A** — a normalized 0–100 search-interest index; needs a stable entity/topic ID

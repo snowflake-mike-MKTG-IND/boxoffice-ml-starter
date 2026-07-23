@@ -13,7 +13,7 @@ replaced by placeholders. Each captures the **method**, not anyone's data.
    - `{{SANDBOX_DB}}`, `{{SCHEMA}}` — your sandbox (docs/02).
    - `{{SEARCH_INTEREST_LIB}}`, `{{ENTITY_LOOKUP_API}}`, `{{COMMENT_PLATFORM}}`,
      `{{PAGEVIEW_API}}`, `{{BOXOFFICE_SOURCE}}`, `{{METADATA_API}}` — the real sources,
-     which CoCo helps you identify from the `sources/` dossiers (docs/03).
+     which CoCo helps you research from the `sources/` dossiers (docs/03).
    - Keys come from your git-ignored `.env`.
 
 ## What's here

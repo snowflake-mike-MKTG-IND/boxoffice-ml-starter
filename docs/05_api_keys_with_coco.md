@@ -43,7 +43,7 @@ CoCo supports a local secret store so values never appear in conversation. Ask:
 
 ## Golden rules
 - **Never** commit `.env`, `*.key`, `*.p8`, or `connections.toml` (`.gitignore` blocks them).
-- **Never** paste a key into a skill file, a dossier, or a prompt you'll commit.
+- **Never** paste a key into a skill file, a source dossier, or a prompt you'll commit.
 - If a key is ever exposed, **rotate it immediately** with the provider.
 
 Next: **`docs/06_model_overview.md`**.
