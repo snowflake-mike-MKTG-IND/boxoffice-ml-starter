@@ -1,0 +1,32 @@
+# Secrets & local config — NEVER commit these
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p8
+connections.toml
+config.toml
+**/secrets*.json
+
+# Ingested data — not ours to reshare, keep out of git
+data/
+**/data/
+*.csv
+*.parquet
+*.json.gz
+raw_pulls/
+downloads/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+*.swp
