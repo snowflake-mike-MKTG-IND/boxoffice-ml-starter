@@ -52,5 +52,5 @@ fill opening weekends once films release.
 
 ## You're research-ready
 You now have one modeling row per film with volume, decomposed intent, and demand
-percentiles against a validated label. For how to model it honestly, see
+percentiles against a validated label. For a rigorous modeling approach, see
 **`docs/06_model_overview.md`**.

@@ -16,7 +16,7 @@ per-title **"popularity" score** — a platform-internal engagement metric updat
 It looks like a strong predictor and early versions leaned on it — but its popularity value
 is contaminated by information that co-moves with the outcome (it reflects buzz that itself
 responds to the release). Using it inflates offline accuracy and **leaks** signal you won't
-have cleanly at true prediction time. In honest, walk-forward validation it does not hold
+have cleanly at true prediction time. In walk-forward, out-of-sample validation it does not hold
 up, so the current model **drops it entirely**.
 
 You may still use this API for **static metadata** (budget, runtime, genre, cast) if you

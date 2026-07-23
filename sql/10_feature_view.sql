@@ -1,5 +1,5 @@
 -- 10_feature_view.sql — assemble one modeling row per film from the signal tables.
--- Replace {{SANDBOX_DB}}. Mirrors the honest, demand-forward feature set:
+-- Replace {{SANDBOX_DB}}. Mirrors the demand-forward feature set:
 --   volume + decomposed intent (Source B), search + encyclopedia demand percentiles
 --   (Source A + C), static metadata (Source E, static fields only), target (Source D).
 -- Pedigree (budget/star/etc.) is intentionally kept minimal and, in the model, only

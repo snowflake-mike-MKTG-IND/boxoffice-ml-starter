@@ -13,7 +13,7 @@ You bring your own data access. The repo brings the method, the schema, the guar
 - A **dedicated Snowflake sandbox** you fully control.
 - An **empty, source-agnostic schema** for films, releases, box office, trailer comments, search interest, and encyclopedia demand.
 - **Ingestion + normalization + AI scoring** for each signal, built against *your own* data access.
-- A **feature view** suitable for honest, walk-forward temporal modeling.
+- A **feature view** suitable for leakage-free, walk-forward temporal modeling.
 
 ## How to use it
 

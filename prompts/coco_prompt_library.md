@@ -74,7 +74,7 @@ your role. Order roughly follows `docs/01`→`06`.
 
 ---
 
-## Model (honest)
+## Model (rigorous validation)
 
 > "Using `OW_FEATURES`, build a walk-forward temporal backtest for log opening weekend.
 > Compare a tier-classifier baseline vs a distributional regressor on the SAME films and

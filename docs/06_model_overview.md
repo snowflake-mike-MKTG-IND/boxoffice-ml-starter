@@ -1,8 +1,8 @@
-# 06 — Model overview (the honest version)
+# 06 — Model overview
 
 This repo gets you to a research-ready feature set. How you model it is up to you, but here
-is the approach that held up under honest validation — and, just as important, the traps
-that didn't.
+is the approach that held up under rigorous, out-of-sample validation — and, just as
+important, the traps that didn't.
 
 ## The two signals that carry the weight
 
@@ -16,7 +16,7 @@ that didn't.
 Add **demand percentiles** (Sources A + C) — search interest and encyclopedia pageviews —
 and you have a demand-forward feature set that doesn't lean on gameable marketing numbers.
 
-## Validate the honest way: walk-forward in time
+## Validate out-of-sample: walk-forward in time
 
 Do **not** report accuracy from random k-fold cross-validation on all films — it lets the
 model peek at the future. Use **temporal (walk-forward) validation**: sort films by release
