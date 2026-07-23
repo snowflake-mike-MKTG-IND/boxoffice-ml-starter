@@ -34,5 +34,3 @@ WHERE b.OPENING_WEEKEND <= 0
    OR r.RELEASE_DATE IS NULL;
 ```
 
-## Compliance
-- Don't reshare licensed data. Keep it in your sandbox; keep raw files out of git.
