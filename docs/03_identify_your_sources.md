@@ -14,35 +14,34 @@ signal and set it up — using Cortex Code as your research partner.
 
 ## Research prompts (copy-paste)
 
-**Source A — search interest**
-> "Read `sources/source_A_search_interest.md`. Based on this fingerprint — a free 0–100
-> relative search-interest index, per-query rescaling, a stable entity/topic ID system, and
-> an anchor-term normalization — what is the most likely public source and Python client?
-> How do I get the entity-lookup key, and what's the smallest validated pull for one film?"
+**Source A — search & attention demand**
+> "Read `sources/source_A_search_interest.md`. What are my options for a pre-release
+> search/attention demand signal — free and paid? Recommend one for a solo project, explain
+> how to normalize it and disambiguate the title, and help me do one validated pull."
 
-**Source B — trailer comments**
-> "Read `sources/source_B_trailer_comments.md`. Which video platform and which official API
-> is this? Show me how to pull comments for one trailer with my own key, pseudonymize
-> handles on ingest, and load to `{{SANDBOX_DB}}.RESEARCH.TRAILER_COMMENTS_RAW`."
+**Source B — trailer conversation**
+> "Read `sources/source_B_trailer_comments.md`. What are my options for pulling public
+> trailer comments, and which official API should I use with my own key? Show me how to pull
+> one trailer, pseudonymize handles, and load to `{{SANDBOX_DB}}.RESEARCH.TRAILER_COMMENTS_RAW`."
 
-**Source C — encyclopedia pageviews**
-> "Read `sources/source_C_encyclopedia_pageviews.md`. Name the source and its keyless daily
-> pageview API. Help me resolve one film to its canonical article and pull the pre-release
-> window."
+**Source C — reference-page demand**
+> "Read `sources/source_C_encyclopedia_pageviews.md`. What are my options for a reference-page
+> demand signal with an open API? Help me resolve one film to its canonical page and pull the
+> pre-release window."
 
 **Source D — box office (the label)**
-> "Read `sources/source_D_box_office_history.md`. What kind of provider is this, and does it
-> offer an official or licensed feed so I don't scrape it? Help me set up licensed access
-> and a release-date/OW validation check against a second reference."
+> "Read `sources/source_D_box_office_history.md`. What are my options for opening-weekend
+> data, and which offer official or licensed access? Help me set one up and a
+> release-date/OW validation check against a second reference."
 
-**Source E — metadata popularity (excluded)**
-> "Read `sources/source_E_metadata_popularity.md`. Name the likely metadata API. I only want
-> static fields (budget, runtime, genre). Explain why the popularity score is leakage and
-> keep it out of my feature view."
+**Source E — title metadata (use with care)**
+> "Read `sources/source_E_metadata_popularity.md`. What are my options for a title-metadata
+> source? I only want static fields (budget, runtime, genre). Explain why a live popularity
+> score is leakage and keep it out of my feature view."
 
 ## Your due-diligence checklist (do this, don't skip)
 
-- [ ] Confirm the source CoCo named is actually the one you intend to use.
+- [ ] Confirm the source you chose actually fits your access and terms.
 - [ ] Read that provider's **current** Terms of Service and API/scraping policy.
 - [ ] Use **official or licensed** access wherever offered (required for Source D).
 - [ ] Get your **own** key; store it in `.env` (never in git, never in a skill file).

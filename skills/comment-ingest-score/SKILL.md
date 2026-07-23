@@ -7,7 +7,7 @@ description: "Ingest public trailer comments and score them with Snowflake Corte
 
 Ingest public trailer-comment threads and turn them into the project's core signal:
 **volume** + **decomposed intent**. Read `sources/source_B_trailer_comments.md` first and
-have CoCo confirm the real platform + official API.
+ask CoCo to compare the platform options and choose one with an official API.
 
 ## Prerequisites
 - `COMMENT_PLATFORM_API_KEY` in `.env` (preferred: official platform API).

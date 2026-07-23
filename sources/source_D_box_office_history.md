@@ -1,45 +1,37 @@
-# Source D — Box-office history (the label)
+# Source D — Box-office results (the label)
 
-This provides the **target** the model predicts (domestic opening weekend) plus the
-historical grosses used for predecessor/franchise features.
+## The signal
+The target the model predicts: **domestic opening weekend**, plus historical grosses,
+theater counts (to filter wide releases), and accurate release dates.
 
-## What it is
-An industry box-office tracker that publishes historical **weekend charts**, per-film
-**opening weekends**, theater counts, and release dates.
+## Options CoCo can help you choose from
+Box-office results are published by several industry trackers and are available as licensed
+datasets and, in some cases, official APIs. Ask CoCo for the options and their access terms,
+and pick the one that fits. A practical note: some popular trackers **restrict automated
+access**, so prefer an **official or licensed** feed, a properly licensed dataset, or manual
+curation of the handful of figures your research set needs. Confirm a source's current Terms
+of Service before any programmatic access.
 
-## Fingerprint
-- Web tables of weekend charts (rank, title, weekend gross, theaters, cumulative) and
-  per-film pages with a "Domestic Releases:" date and opening-weekend figure.
-- Predictable URL structure by date and by film slug + year.
-- The label you care about is **domestic opening weekend**; you also want theater count
-  (to filter wide releases) and an accurate **release date** (a wrong date corrupts the
-  whole pre-release feature window).
+## Data-quality discipline (don't skip this)
+- **Validate release dates against a second reference.** A wrong date silently corrupts the
+  entire pre-release feature window and the release-month feature.
+- **Verify opening-weekend figures independently.** Never trust a single fresh value — a
+  past audit of a training set turned up fabricated grosses and corrupted dates. Cross-check
+  before you train on anything.
 
-## ⚠️ Access restriction — read this first
-This kind of provider has **restricted automated scraping** (they moved to block AI
-scrapers). **Do not build a scraper against it.** Instead:
-
-- Use an **official/licensed data feed or API** if the provider offers one
-  (`BOXOFFICE_ACCESS_TOKEN` in `.env`), or
-- Use a properly licensed box-office dataset, or
-- Enter/curate the handful of figures you need manually for your research set.
-
-Always confirm the current Terms of Service before any programmatic access. Respect it.
-
-## Data-quality discipline (this bit its predecessors)
-- **Validate every release date** against a second reference before pulling pre-release
-  signals — a wrong date silently corrupts the days-out alignment and the release-month
-  feature.
-- **Verify opening-weekend figures** independently after release. A past audit of a
-  training set found fabricated OW values and corrupted dates — never trust a fresh value
-  without a second source.
+```sql
+-- Flag suspicious rows for manual review
+SELECT b.MOVIE_ID, b.MOVIE_TITLE, b.OPENING_WEEKEND, r.RELEASE_DATE
+FROM {{SANDBOX_DB}}.{{SCHEMA}}.BOX_OFFICE b
+JOIN {{SANDBOX_DB}}.{{SCHEMA}}.RELEASE_DATES r USING (MOVIE_ID)
+WHERE b.OPENING_WEEKEND <= 0 OR b.THEATER_COUNT < 1000 OR r.RELEASE_DATE IS NULL;
+```
 
 ## Feeds these columns
-- `BOX_OFFICE`: `MOVIE_ID`, `MOVIE_TITLE`, `OPENING_WEEKEND`, `THEATER_COUNT`.
-- `RELEASE_DATES`: `MOVIE_ID`, `RELEASE_DATE` (validated).
+- `BOX_OFFICE` (`OPENING_WEEKEND`, `THEATER_COUNT`, `MOVIE_TITLE`)
+- `RELEASE_DATES` (`RELEASE_DATE`, validated)
 
 ## Ask CoCo
-> "Read `sources/source_D_box_office_history.md`. What kind of source is this, and does it
-> offer an official/licensed feed I can use instead of scraping? Help me set up licensed
-> access, and build a release-date + opening-weekend validation check against a second
-> reference before I trust any value."
+> "Read `sources/source_D_box_office_history.md`. What are my options for domestic
+> opening-weekend data, and which offer official or licensed access? Help me set one up and
+> build a release-date + opening-weekend validation check against a second reference."

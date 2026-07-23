@@ -5,9 +5,9 @@ rather than prescribing one provider. Teams differ in the data access, budget, a
 they have, and some providers restrict how their data may be accessed — so the kit stays
 provider-neutral and helps you research the option that fits, under your own access.
 
-Each dossier is a **fingerprint**: what the signal is, how it behaves, how it's typically
-accessed, its quirks and gotchas, and the schema columns it feeds. That's enough for Cortex
-Code to help you research the most likely real sources when you ask — and then to set up the
+Each dossier covers **what the signal is**, how it's typically accessed, the kinds of
+providers that offer it, the gotchas that matter, and the schema columns it feeds. That's
+enough for Cortex Code to lay out your options when you ask — and then to help you set up the
 one you choose against **your own** access.
 
 ## The research pattern

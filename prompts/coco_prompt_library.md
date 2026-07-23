@@ -23,27 +23,29 @@ your role. Order roughly follows `docs/01`→`06`.
 
 ## Research the sources
 
-**Source A — search interest**
-> "Read `sources/source_A_search_interest.md`. From this fingerprint, name the most likely
-> public source and Python client, explain the entity-ID + anchor normalization, and do one
-> validated pull for a test film."
+**Source A — search & attention demand**
+> "Read `sources/source_A_search_interest.md`. What are my options for a pre-release
+> search/attention signal, free and paid? Recommend one, explain how to normalize it and
+> disambiguate the title, and do one validated pull for a test film."
 
-**Source B — trailer comments**
-> "Read `sources/source_B_trailer_comments.md`. Which platform + official API? Pull one
-> trailer's comments with my key, pseudonymize handles, load to `TRAILER_COMMENTS_RAW`."
+**Source B — trailer conversation**
+> "Read `sources/source_B_trailer_comments.md`. What are my options, and which official API
+> should I use? Pull one trailer's comments with my key, pseudonymize handles, load to
+> `TRAILER_COMMENTS_RAW`."
 
-**Source C — encyclopedia pageviews**
-> "Read `sources/source_C_encyclopedia_pageviews.md`. Name the source + pageview API. Resolve
-> one film to its canonical article and pull the pre-release window."
+**Source C — reference-page demand**
+> "Read `sources/source_C_encyclopedia_pageviews.md`. What are my options for a reference-page
+> demand signal with an open API? Resolve one film to its canonical page and pull the
+> pre-release window."
 
 **Source D — box office**
-> "Read `sources/source_D_box_office_history.md`. Identify the provider and whether it offers
-> an official/licensed feed instead of scraping. Set up licensed access and a
-> date/OW validation check against a second reference."
+> "Read `sources/source_D_box_office_history.md`. What are my options, and which offer
+> official/licensed access? Set one up and a date/OW validation check against a second
+> reference."
 
-**Source E — metadata (excluded)**
-> "Read `sources/source_E_metadata_popularity.md`. Name the metadata API. Pull static fields
-> only and explain why the popularity score is leakage."
+**Source E — title metadata (use with care)**
+> "Read `sources/source_E_metadata_popularity.md`. What are my options? Pull static fields
+> only and explain why a live popularity score is leakage."
 
 ---
 

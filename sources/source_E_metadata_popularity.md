@@ -1,32 +1,30 @@
-# Source E — Metadata popularity score (EXCLUDED as leakage)
+# Source E — Title metadata & popularity (use with care)
 
-This dossier exists to explain a source you should **know about but not use** in the model.
+This one is here mostly as a **cautionary note**: a source that looks helpful but whose
+headline metric you should keep out of the model.
 
-## What it is
-A large, community-maintained **movie metadata database** exposes an API that includes a
-per-title **"popularity" score** — a platform-internal engagement metric updated daily.
+## The signal
+Structured metadata about a title — budget, runtime, genre, cast, ratings — often bundled
+with a platform-computed **"popularity" score** that updates continuously.
 
-## Fingerprint
-- A well-known metadata API (keyed) returning cast, budget, runtime, genres, and a
-  changing numeric **popularity** field.
-- The popularity score updates continuously based on activity *on that platform*, including
-  activity that spikes **around and after** release.
+## Options CoCo can help you choose from
+Several movie metadata databases and catalog APIs provide these fields. Ask CoCo for the
+options; most solo projects use one keyed metadata API for **static** attributes only.
 
-## Why it's excluded from the model
-It looks like a strong predictor and early versions leaned on it — but its popularity value
-is contaminated by information that co-moves with the outcome (it reflects buzz that itself
-responds to the release). Using it inflates offline accuracy and **leaks** signal you won't
-have cleanly at true prediction time. In walk-forward, out-of-sample validation it does not hold
-up, so the current model **drops it entirely**.
+## Why the popularity score is a trap (leakage)
+A live popularity score looks like a strong predictor, and early versions leaned on it — but
+it's contaminated by activity that co-moves with the outcome (it reflects buzz that itself
+responds to the release). Feeding it in inflates offline accuracy and **leaks** signal you
+won't have cleanly at prediction time; under walk-forward validation it doesn't hold up. The
+current model **drops it entirely**.
 
-You may still use this API for **static metadata** (budget, runtime, genre, cast) if you
-lack another source — just **never** feed the live popularity score into the model.
+Use such a source for **static fields** (budget, runtime, genre, cast) if you need them —
+just never feed the live popularity metric into the model.
 
-## If you use it for static fields only
-- Key in `.env` as `METADATA_API_KEY`.
-- Pull once, store static attributes; ignore the popularity field for modeling.
+## Feeds these columns
+- `MOVIE_METADATA` (static fields only — note there is intentionally **no** popularity column).
 
 ## Ask CoCo
-> "Read `sources/source_E_metadata_popularity.md`. Name the likely metadata API. I only
-> want static fields (budget, runtime, genre). Explain concretely why its popularity score
-> is a leakage risk and make sure it never enters my feature view."
+> "Read `sources/source_E_metadata_popularity.md`. What are my options for a title-metadata
+> source? I only want static fields (budget, runtime, genre). Explain why a live popularity
+> score is a leakage risk and make sure it never enters my feature view."

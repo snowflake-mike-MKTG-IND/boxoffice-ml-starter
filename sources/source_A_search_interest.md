@@ -1,48 +1,36 @@
-# Source A — Normalized search-interest index
+# Source A — Pre-release search & attention demand
 
-## What it is
-A free, public index of **relative search interest** in a topic over time. Values are not
-absolute search counts; they're rescaled **0–100 within each query**, where 100 is the
-peak point of that particular pull. This per-query rescaling is the single most important
-quirk to understand.
+## The signal
+How much the public is actively searching for or looking up a film in the weeks before it
+opens. A rising interest curve ahead of release is one of the strongest, hardest-to-game
+demand proxies you can get.
 
-## Fingerprint
-- Web UI lets you compare a handful of terms over a time window and region; there's a
-  popular **unofficial Python client** that automates the same pulls.
-- Returns a date-indexed series per term, each on a shared 0–100 scale *within one query*.
-- Two different pulls are **not** on the same scale — a "60" today and a "60" last month
-  are not comparable unless they were co-scaled in the same request.
-- Free-text queries are ambiguous: searching a film's title also matches unrelated things
-  with the same words. The provider has a **stable entity/topic ID** system (from a related
-  knowledge/entity service) that disambiguates — using the entity ID tracks *the film*,
-  not the words.
+## Options CoCo can help you choose from
+Several public and commercial services expose pre-release interest/attention data. Ask CoCo
+and it will lay out the common choices with their trade-offs — free vs. paid, an official
+API vs. a community client library, geographic coverage, history depth, and rate limits —
+then help you pick one that fits your access and budget. Most solo research projects land on
+a widely-used free interest index; paid attention-data vendors are alternatives when you
+need higher resolution or a guaranteed SLA.
 
-## Known gotchas (learned the hard way)
-- **Always use the entity/topic ID, never free text.** Free text can invert the signal
-  (e.g., a generic term dominates the film). Validate against the provider's own UI.
-- **Normalize with an anchor term.** Because every pull is rescaled 0–100, you can't stitch
-  pulls into a continuous timeline directly. The fix: include a **stable, high-volume anchor
-  term** (something evergreen and movie-related) in *every* comparison pull, then use a
-  separate standalone pull of the anchor over a long window to build a continuous baseline.
-  Normalize each movie pull against the anchor's co-scaled value. See the
-  `search-interest-normalize` skill for the exact two-query method.
-- The anchor term's **text** matters for manual URL exports — an entity ID for the anchor
-  can resolve to the wrong concept. Use the literal anchor text in URLs.
-
-## Access
-- The unofficial client needs no API key but does need a locale/timezone config and is
-  rate-limited (expect throttling; back off and retry).
-- The **entity-ID lookup** service *does* need an API key (`SEARCH_ENTITY_API_KEY` in
-  `.env`). There's also a keyless fallback that returns topic IDs via the client's
-  suggestions endpoint.
+## Things to sort out with whichever you pick
+- **Comparability.** Some interest sources return a *relative* index (rescaled per request)
+  rather than absolute counts, so two separate pulls aren't on the same scale. The usual fix
+  is to include a stable, high-volume reference term in each pull and normalize against a
+  standalone baseline of that reference — CoCo will tailor the exact method to your source.
+- **Disambiguation.** Track the *film*, not every search that happens to share its title.
+  Most sources offer a stable topic/entity ID or an exact-match mode; prefer that over
+  free-text, which pulls in unrelated results.
+- **Access.** May need an API key plus a locale/timezone config; expect throttling, so build
+  in backoff and validate a new title's pull against the source's own UI before trusting it.
 
 ## Feeds these columns
-- `SEARCH_INTEREST` (per movie, per date): raw movie interest + co-scaled anchor value.
-- `SEARCH_ANCHOR_BASELINE`: the normalized continuous anchor timeline.
-- `ENTITY_IDS`: movie → stable entity/topic ID mapping.
-- Downstream: rolling/peak/velocity **demand percentiles by horizon** (−21/−14/−7/−3 days).
+- `SEARCH_INTEREST`, `SEARCH_ANCHOR_BASELINE`, `ENTITY_IDS`
+- Downstream: rolling / peak / velocity **demand percentiles by horizon** (−21/−14/−7/−3 days)
+  in `DEMAND_PERCENTILES`.
 
 ## Ask CoCo
-> "Read `sources/source_A_search_interest.md`. Name the most likely public source and its
-> Python client. Explain the entity-ID lookup and the anchor-normalization, then help me do
-> one validated pull for a test film and store the entity ID."
+> "Read `sources/source_A_search_interest.md`. What are my options for a pre-release
+> search/attention demand signal? Compare a couple of free and paid choices, recommend one
+> for a solo research project, explain how to normalize it and disambiguate the title, and
+> help me pull a validated sample for one film."

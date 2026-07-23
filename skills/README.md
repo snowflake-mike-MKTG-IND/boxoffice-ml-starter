@@ -12,15 +12,15 @@ replaced by placeholders. Each captures the **method**, not anyone's data.
 2. Fill in placeholders the first time you use it:
    - `{{SANDBOX_DB}}`, `{{SCHEMA}}` — your sandbox (docs/02).
    - `{{SEARCH_INTEREST_LIB}}`, `{{ENTITY_LOOKUP_API}}`, `{{COMMENT_PLATFORM}}`,
-     `{{PAGEVIEW_API}}`, `{{BOXOFFICE_SOURCE}}`, `{{METADATA_API}}` — the real sources,
-     which CoCo helps you research from the `sources/` dossiers (docs/03).
+     `{{PAGEVIEW_API}}`, `{{BOXOFFICE_SOURCE}}`, `{{METADATA_API}}` — the source you choose
+     for each signal, which CoCo helps you compare using the `sources/` dossiers (docs/03).
    - Keys come from your git-ignored `.env`.
 
 ## What's here
 
 | Skill | Purpose | Dossier |
 |---|---|---|
-| `search-interest-normalize` | Two-query entity-ID pulls + anchor normalization | Source A |
+| `search-interest-normalize` | Pull + normalize a search/attention demand signal | Source A |
 | `comment-ingest-score` | Ingest trailer comments, pseudonymize, AISQL sentiment/intent | Source B |
 | `encyclopedia-pageviews` | Pull daily pageviews, build demand percentiles | Source C |
 | `box-office-history` | Obtain the label via **licensed/official** access + validation | Source D |
