@@ -76,9 +76,12 @@ your role. Order roughly follows `docs/01`→`06`.
 
 ---
 
-## Model (rigorous validation)
+## Model (build the framework)
 
-> "Using `OW_FEATURES`, build a walk-forward temporal backtest for log opening weekend.
-> Compare a tier-classifier baseline vs a distributional regressor on the SAME films and
-> splits. Report MAPE, median APE, and large-film tail error. Keep pedigree gated behind
-> demand and exclude any leakage features."
+> "Read `docs/07_model_architecture.md` and `model/train_ow_model.py`. Point it at my
+> `{{SANDBOX_DB}}.RESEARCH.OW_FEATURES`, run the walk-forward backtest, and report MAPE,
+> median APE, aLoss, HDR50 coverage, and large-film bias. Keep pedigree gated behind demand
+> and exclude leakage features."
+
+> "Now compare this distributional regressor against a simple tier-classifier baseline on the
+> SAME films and walk-forward splits, so I can see what the architecture change buys."

@@ -23,6 +23,7 @@ You bring your own data access. The repo brings the method, the schema, the guar
 4. **`docs/04_stand_up_the_pipeline.md`** — create the schema and ingest each signal.
 5. **`docs/05_api_keys_with_coco.md`** — get and store the keys you need, safely.
 6. **`docs/06_model_overview.md`** — the modeling method (feature set + walk-forward validation) at a high level.
+7. **`docs/07_model_architecture.md`** — the full model framework (distributional regressor, walk-forward validation, demand-forward flag), with a runnable reference implementation in **`model/train_ow_model.py`**.
 
 `COCO.md` is loaded automatically by Cortex Code when you open this folder — it primes the agent to act as your setup guide.
 
