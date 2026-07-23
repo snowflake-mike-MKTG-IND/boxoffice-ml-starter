@@ -1,6 +1,10 @@
--- 00_schema.sql — empty, source-agnostic schema for the trailer-signal pipeline.
+-- 00_schema.sql — source-agnostic schema for the trailer-signal pipeline.
 -- No data. Replace {{SANDBOX_DB}} with your sandbox database (see docs/02).
 -- Run in Cortex Code or: snow sql --connection my_sandbox -f sql/00_schema.sql
+--
+-- Naming is deliberately provider-neutral: SEARCH_* = search/attention demand (Source A),
+-- PAGEVIEW_* = consumer-research pageview demand (Source C). Nothing here is a live
+-- popularity score — that's excluded as leakage (see sources/source_E_metadata_popularity.md).
 
 USE DATABASE {{SANDBOX_DB}};
 CREATE SCHEMA IF NOT EXISTS RESEARCH;
@@ -16,7 +20,7 @@ CREATE TABLE IF NOT EXISTS MOVIE_MAP (
 
 CREATE TABLE IF NOT EXISTS RELEASE_DATES (
     MOVIE_ID        NUMBER        PRIMARY KEY,
-    RELEASE_DATE    DATE          NOT NULL           -- VALIDATE against a 2nd reference (Source D dossier)
+    RELEASE_DATE    DATE          NOT NULL           -- VALIDATE against a 2nd reference (Source D)
 );
 
 -- ---------------------------------------------------------------------------
@@ -30,7 +34,7 @@ CREATE TABLE IF NOT EXISTS BOX_OFFICE (
 );
 
 -- ---------------------------------------------------------------------------
--- Source A — search interest (relative index) + normalization scaffolding
+-- Source A — search / attention interest (relative index) + normalization scaffolding
 -- ---------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ENTITY_IDS (
     MOVIE_ID        NUMBER        PRIMARY KEY,
@@ -72,49 +76,86 @@ CREATE TABLE IF NOT EXISTS TRAILER_COMMENTS_SCORED (
     COMMENT_ID        STRING,
     COMMENT_TEXT      STRING,
     LIKE_COUNT        NUMBER,
-    SENTIMENT_SCORE   FLOAT,                          -- -1..1
-    SENTIMENT_BUCKET  STRING,                         -- 'positive' | 'neutral' | 'negative'
+    SENTIMENT_SCORE   FLOAT,                          -- -1..1 (mapped from AI_SENTIMENT label)
+    SENTIMENT_BUCKET  STRING,                         -- 'positive' | 'neutral' | 'negative' | 'mixed'
     THEATRICAL_INTENT NUMBER,                         -- 1/0
     STREAMING_INTENT  NUMBER,                         -- 1/0
-    PASS_INTENT       NUMBER                          -- 1/0
+    PASS_INTENT       NUMBER                          -- 1/0  (NEUTRAL comment = all three 0)
 );
 
 -- ---------------------------------------------------------------------------
--- Source C — consumer research pageviews
+-- Source C — consumer research pageview activity
 -- ---------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS PAGEVIEW_DEMAND (
     MOVIE_ID        NUMBER,
     OBS_DATE        DATE,
-    VIEWS           NUMBER,
+    VIEWS           NUMBER,                           -- absolute daily views
     PRIMARY KEY (MOVIE_ID, OBS_DATE)
 );
 
 -- ---------------------------------------------------------------------------
--- Derived demand percentiles by pre-release horizon (from A + C)
--- horizons: DAYS_OUT in (-21, -14, -7, -3)
+-- Static attributes & pedigree (per film)
+-- Your own catalog and/or Source E static fields. NOTE: intentionally NO live
+-- popularity score — that co-moves with the outcome and leaks (see source_E).
+-- In the model, the raw pedigree columns (budget/star/predecessor/IP) are NOT used
+-- standalone — they enter ONLY through demand-gated interactions in OW_FEATURES.
 -- ---------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS DEMAND_PERCENTILES (
-    MOVIE_ID              NUMBER,
-    DAYS_OUT              NUMBER,
-    ROLLING_7D_PCTILE     FLOAT,
-    ROLLING_14D_PCTILE    FLOAT,
-    TRENDS_PEAK_PCTILE    FLOAT,
-    PAGEVIEW_R7D_PCTILE       FLOAT,
-    PAGEVIEW_PEAK_PCTILE      FLOAT,
-    PAGEVIEW_CUM_PCTILE       FLOAT,
-    PRIMARY KEY (MOVIE_ID, DAYS_OUT)
+CREATE TABLE IF NOT EXISTS MOVIE_METADATA (
+    MOVIE_ID              NUMBER PRIMARY KEY,
+    RUNTIME               NUMBER,
+    BUDGET                FLOAT,
+    BUDGET_LOG            FLOAT,
+    -- star power (from your own cast/history source)
+    MAX_STAR_POWER        FLOAT,
+    TOP2_STAR_POWER       FLOAT,
+    AVG_STAR_POWER        FLOAT,
+    NUM_STARS_WITH_HISTORY NUMBER,
+    -- franchise / prior title
+    PREDECESSOR_OW        FLOAT,
+    PREDECESSOR_OW_LOG    FLOAT,
+    -- IP tier flags (one-hot)
+    KNOWN_IP_TIER         NUMBER,
+    IP_HIGH_PROFILE       NUMBER,
+    IP_MODERATE           NUMBER,
+    IP_NICHE              NUMBER,
+    IP_ORIGINAL           NUMBER,
+    IS_MAJOR_STUDIO       NUMBER,
+    -- genre flags (one-hot)
+    GENRE_ACTION_FRANCHISE NUMBER,
+    GENRE_HORROR          NUMBER,
+    GENRE_ANIMATION_FAMILY NUMBER,
+    GENRE_ORIGINAL        NUMBER,
+    GENRE_PRESTIGE        NUMBER,
+    -- rating flags (one-hot)
+    RATING_G              NUMBER,
+    RATING_PG             NUMBER,
+    RATING_PG13           NUMBER,
+    RATING_R              NUMBER
 );
 
 -- ---------------------------------------------------------------------------
--- Optional Source E — static metadata only (NEVER the live popularity score)
+-- Derived demand percentiles by pre-release horizon (from Source A + Source C).
+-- One row per (MOVIE_ID, DAYS_OUT); DAYS_OUT in (-21, -14, -7, -3).
+-- Percentiles are ranked ACROSS the film set per horizon (PERCENT_RANK), which tames
+-- the huge dynamic range. In production this is often an auto-computing VIEW; a table
+-- works fine for a starter build.
 -- ---------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS MOVIE_METADATA (
-    MOVIE_ID        NUMBER        PRIMARY KEY,
-    BUDGET          FLOAT,
-    RUNTIME         NUMBER,
-    GENRE           STRING,
-    RATING          STRING
-    -- NOTE: intentionally NO popularity column. See sources/source_E.
+CREATE TABLE IF NOT EXISTS DEMAND_PERCENTILES (
+    MOVIE_ID                 NUMBER,
+    DAYS_OUT                 NUMBER,
+    -- search / attention demand (Source A)
+    SEARCH_ROLLING_3D_PCTILE  FLOAT,
+    SEARCH_ROLLING_7D_PCTILE  FLOAT,
+    SEARCH_ROLLING_14D_PCTILE FLOAT,
+    SEARCH_PEAK_PCTILE        FLOAT,
+    SEARCH_VEL_PCTILE         FLOAT,                   -- velocity (3d-vs-7d change)
+    SEARCH_SLOPE_PCTILE       FLOAT,                   -- log slope, 14d -> 3d
+    -- consumer research pageview demand (Source C)
+    PAGEVIEW_R7D_PCTILE       FLOAT,
+    PAGEVIEW_PEAK_PCTILE      FLOAT,
+    PAGEVIEW_CUM_PCTILE       FLOAT,
+    PAGEVIEW_VEL_PCTILE       FLOAT,
+    PRIMARY KEY (MOVIE_ID, DAYS_OUT)
 );
 
 -- Films to exclude from the model (bad data, re-releases, etc.)
