@@ -1,4 +1,4 @@
-# Trailer-Signal Starter
+# Box-Office-ML-Starter
 
 A hands-on starter kit for reproducing a piece of applied research: **can the organic conversation around a movie trailer predict its opening weekend better than the marketing metrics everyone already games?**
 
