@@ -25,24 +25,19 @@ evaluate and set up the one that fits — against their own credentials and each
 terms of service.
 
 There are five signals:
-- **Source A** — a normalized 0–100 search-interest index; needs a stable entity/topic ID
-  per title and an anchor-term normalization to build a continuous baseline.
+- **Source A** — a normalized search-interest index; needs a stable ids 
+  per title and an potentially an anchor-term normalization to build a continuous baseline.
 - **Source B** — public trailer-comment threads, scored with Snowflake Cortex AISQL into
   sentiment and intent (theatrical / streaming / pass).
-- **Source C** — an open encyclopedia pageview API, turned into demand percentiles.
+- **Source C** — an open entity id based pageview data source, turned into demand percentiles.
 - **Source D** — an industry box-office tracker (historical grosses + opening weekends);
-  this provider has restricted automated scraping — steer the user to official/licensed access.
-- **Source E** — a movie-metadata popularity API; **excluded from the model as leakage**.
-  Mention it, but explain why it's dropped.
+- **Source E** — a movie-metadata source; 
 
 ## Hard rules (do not violate)
 
 - Never write real API keys, tokens, account locators, or personal emails into repo files.
   Keys live in a git-ignored `.env` (template: `.env.example`).
-- Never commit ingested third-party data. `data/` is git-ignored. Do not reshare source data.
-- Respect each source's ToS, robots.txt, and rate limits. For Source D, do not build a
-  scraper — use official/licensed access.
-- Recommend pseudonymizing user handles from public comments.
+- Respect each source's ToS, robots.txt, and rate limits. 
 - Keep internal/customer-specific identifiers out of anything you generate. Use the
   templated names: `{{SANDBOX_DB}}.{{SCHEMA}}.<TABLE>`.
 
