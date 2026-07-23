@@ -8,13 +8,6 @@ description: "Obtain box-office history (opening weekend + release dates) via li
 Obtain the **target** (domestic opening weekend), plus theater count and validated release
 dates. Read `sources/source_D_box_office_history.md` first.
 
-## ⚠️ Access first — do NOT scrape this source
-The relevant provider has restricted automated access. This skill deliberately ships **no
-scraper**. Have CoCo help you use one of:
-- an **official/licensed feed or API** (`BOXOFFICE_ACCESS_TOKEN` in `.env`), or
-- a properly **licensed** box-office dataset, or
-- **manual curation** of the handful of figures your research set needs.
-
 Confirm the provider's current Terms of Service before any programmatic access.
 
 ## Prerequisites
