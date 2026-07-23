@@ -21,7 +21,7 @@ Run the installed skills (see `skills/`), in this order:
 |---|---|---|
 | 1 | `box-office-history` | `BOX_OFFICE`, `RELEASE_DATES` (label + validated dates) |
 | 2 | `search-interest-normalize` | `ENTITY_IDS`, `SEARCH_INTEREST`, `SEARCH_ANCHOR_BASELINE` |
-| 3 | `encyclopedia-pageviews` | `ENCYCLOPEDIA_PAGEVIEWS` |
+| 3 | `research-pageviews` | `PAGEVIEW_DEMAND` |
 | 4 | `comment-ingest-score` | `TRAILER_COMMENTS_RAW` → `TRAILER_COMMENTS_SCORED` |
 | 5 | (metadata, optional/static only) | `MOVIE_METADATA` |
 

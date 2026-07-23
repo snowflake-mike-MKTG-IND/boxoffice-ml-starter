@@ -33,8 +33,8 @@ your role. Order roughly follows `docs/01`→`06`.
 > should I use? Pull one trailer's comments with my key, pseudonymize handles, load to
 > `TRAILER_COMMENTS_RAW`."
 
-**Source C — reference-page demand**
-> "Read `sources/source_C_encyclopedia_pageviews.md`. What are my options for a reference-page
+**Source C — consumer research pageview demand**
+> "Read `sources/source_C_research_pageviews.md`. What are my options for a consumer-research pageview
 > demand signal with an open API? Resolve one film to its canonical page and pull the
 > pre-release window."
 
@@ -56,7 +56,7 @@ your role. Order roughly follows `docs/01`→`06`.
 > available model, run it, and show me per-film volume + net intent %."
 
 **Demand percentiles**
-> "From `SEARCH_INTEREST` and `ENCYCLOPEDIA_PAGEVIEWS`, build `DEMAND_PERCENTILES` at
+> "From `SEARCH_INTEREST` and `PAGEVIEW_DEMAND`, build `DEMAND_PERCENTILES` at
 > horizons -21/-14/-7/-3 (cumulative, rolling, peak, velocity)."
 
 **Feature view**

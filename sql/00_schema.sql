@@ -80,9 +80,9 @@ CREATE TABLE IF NOT EXISTS TRAILER_COMMENTS_SCORED (
 );
 
 -- ---------------------------------------------------------------------------
--- Source C — encyclopedia pageviews
+-- Source C — consumer research pageviews
 -- ---------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS ENCYCLOPEDIA_PAGEVIEWS (
+CREATE TABLE IF NOT EXISTS PAGEVIEW_DEMAND (
     MOVIE_ID        NUMBER,
     OBS_DATE        DATE,
     VIEWS           NUMBER,
@@ -99,9 +99,9 @@ CREATE TABLE IF NOT EXISTS DEMAND_PERCENTILES (
     ROLLING_7D_PCTILE     FLOAT,
     ROLLING_14D_PCTILE    FLOAT,
     TRENDS_PEAK_PCTILE    FLOAT,
-    WIKI_R7D_PCTILE       FLOAT,
-    WIKI_PEAK_PCTILE      FLOAT,
-    WIKI_CUM_PCTILE       FLOAT,
+    PAGEVIEW_R7D_PCTILE       FLOAT,
+    PAGEVIEW_PEAK_PCTILE      FLOAT,
+    PAGEVIEW_CUM_PCTILE       FLOAT,
     PRIMARY KEY (MOVIE_ID, DAYS_OUT)
 );
 

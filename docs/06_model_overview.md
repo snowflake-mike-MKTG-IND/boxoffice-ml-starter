@@ -13,7 +13,7 @@ important, the traps that didn't.
   volume — so the little it carries **stacks additively** on top of volume rather than
   echoing it.
 
-Add **demand percentiles** (Sources A + C) — search interest and encyclopedia pageviews —
+Add **demand percentiles** (Sources A + C) — search interest and consumer research pageviews —
 and you have a demand-forward feature set that doesn't lean on gameable marketing numbers.
 
 ## Validate out-of-sample: walk-forward in time

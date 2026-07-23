@@ -22,7 +22,7 @@ replaced by placeholders. Each captures the **method**, not anyone's data.
 |---|---|---|
 | `search-interest-normalize` | Pull + normalize a search/attention demand signal | Source A |
 | `comment-ingest-score` | Ingest trailer comments, pseudonymize, AISQL sentiment/intent | Source B |
-| `encyclopedia-pageviews` | Pull daily pageviews, build demand percentiles | Source C |
+| `research-pageviews` | Pull daily pageviews, build demand percentiles | Source C |
 | `box-office-history` | Obtain the label via **licensed/official** access + validation | Source D |
 | `pipeline-refresh` | Orchestrate the active-window refresh across all signals | all |
 

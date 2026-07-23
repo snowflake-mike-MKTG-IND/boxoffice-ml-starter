@@ -24,8 +24,8 @@ signal and set it up — using Cortex Code as your research partner.
 > trailer comments, and which official API should I use with my own key? Show me how to pull
 > one trailer, pseudonymize handles, and load to `{{SANDBOX_DB}}.RESEARCH.TRAILER_COMMENTS_RAW`."
 
-**Source C — reference-page demand**
-> "Read `sources/source_C_encyclopedia_pageviews.md`. What are my options for a reference-page
+**Source C — consumer research pageview demand**
+> "Read `sources/source_C_research_pageviews.md`. What are my options for a consumer-research pageview
 > demand signal with an open API? Help me resolve one film to its canonical page and pull the
 > pre-release window."
 

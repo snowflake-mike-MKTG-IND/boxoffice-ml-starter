@@ -34,7 +34,7 @@ through setup. Repeat per source. The full prompt set is in `../prompts/coco_pro
 |---|---|---|
 | `source_A_search_interest.md` | Normalized search-interest index per title | Yes (demand) |
 | `source_B_trailer_comments.md` | Public trailer-comment volume + AI-scored intent | Yes (the core signal) |
-| `source_C_encyclopedia_pageviews.md` | Encyclopedia pageview demand | Yes (demand) |
+| `source_C_research_pageviews.md` | Consumer research pageview demand | Yes (demand) |
 | `source_D_box_office_history.md` | Historical grosses + opening weekends (the label) | Yes (target + history) |
 | `source_E_metadata_popularity.md` | Third-party metadata popularity score | **No — excluded as leakage** |
 

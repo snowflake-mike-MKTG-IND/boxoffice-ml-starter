@@ -10,7 +10,7 @@ in a skill file** — they live in a git-ignored `.env`.
 |---|---|---|
 | A — search interest | Entity lookup key (client itself often keyless) | `SEARCH_ENTITY_API_KEY` |
 | B — trailer comments | Yes, if using the official platform API | `COMMENT_PLATFORM_API_KEY` |
-| C — encyclopedia pageviews | No key; just a polite contact string | `PAGEVIEW_CONTACT` |
+| C — consumer research pageviews | No key; just a polite contact string | `PAGEVIEW_CONTACT` |
 | D — box office | Licensed/official access credential | `BOXOFFICE_ACCESS_TOKEN` |
 | E — metadata (static only) | Yes | `METADATA_API_KEY` |
 

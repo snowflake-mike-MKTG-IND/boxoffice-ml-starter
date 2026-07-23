@@ -11,7 +11,7 @@ You bring your own data access. The repo brings the method, the schema, the guar
 ## What you'll end up with
 
 - A **dedicated Snowflake sandbox** you fully control.
-- An **empty, source-agnostic schema** for films, releases, box office, trailer comments, search interest, and encyclopedia demand.
+- An **empty, source-agnostic schema** for films, releases, box office, trailer comments, search interest, and consumer research pageview demand.
 - **Ingestion + normalization + AI scoring** for each signal, built against *your own* data access.
 - A **feature view** suitable for leakage-free, walk-forward temporal modeling.
 

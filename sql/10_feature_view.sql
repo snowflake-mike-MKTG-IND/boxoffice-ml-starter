@@ -1,6 +1,6 @@
 -- 10_feature_view.sql — assemble one modeling row per film from the signal tables.
 -- Replace {{SANDBOX_DB}}. Mirrors the demand-forward feature set:
---   volume + decomposed intent (Source B), search + encyclopedia demand percentiles
+--   volume + decomposed intent (Source B), search + consumer research pageview demand percentiles
 --   (Source A + C), static metadata (Source E, static fields only), target (Source D).
 -- Pedigree (budget/star/etc.) is intentionally kept minimal and, in the model, only
 -- enters gated behind demand — see docs/06_model_overview.md.
@@ -34,7 +34,7 @@ SELECT
     c.PCT_THEA, c.PCT_PASS, c.PCT_POS, c.PCT_NEG, c.NET_INTENT_PCT,
     -- Source A + C: demand percentiles at the final pre-release horizon
     dp.ROLLING_7D_PCTILE, dp.ROLLING_14D_PCTILE, dp.TRENDS_PEAK_PCTILE,
-    dp.WIKI_R7D_PCTILE, dp.WIKI_PEAK_PCTILE, dp.WIKI_CUM_PCTILE,
+    dp.PAGEVIEW_R7D_PCTILE, dp.PAGEVIEW_PEAK_PCTILE, dp.PAGEVIEW_CUM_PCTILE,
     -- Source E (static only)
     meta.BUDGET, meta.RUNTIME, meta.GENRE, meta.RATING,
     -- example demand x intent / demand x pedigree interactions (built in the model layer)

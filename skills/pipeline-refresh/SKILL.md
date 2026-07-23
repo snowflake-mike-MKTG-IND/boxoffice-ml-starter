@@ -22,7 +22,7 @@ SELECT m.MOVIE_ID, m.MOVIE_TITLE, rd.RELEASE_DATE,
          WHERE s.MOVIE_ID = m.MOVIE_ID)                          AS SEARCH_MAX_DATE,
        (SELECT COUNT(*) FROM {{SANDBOX_DB}}.{{SCHEMA}}.TRAILER_COMMENTS_SCORED c
          WHERE c.MOVIE_ID = m.MOVIE_ID)                          AS COMMENTS_SCORED,
-       (SELECT MAX(OBS_DATE) FROM {{SANDBOX_DB}}.{{SCHEMA}}.ENCYCLOPEDIA_PAGEVIEWS p
+       (SELECT MAX(OBS_DATE) FROM {{SANDBOX_DB}}.{{SCHEMA}}.PAGEVIEW_DEMAND p
          WHERE p.MOVIE_ID = m.MOVIE_ID)                          AS PAGEVIEW_MAX_DATE
 FROM {{SANDBOX_DB}}.{{SCHEMA}}.MOVIE_MAP m
 JOIN {{SANDBOX_DB}}.{{SCHEMA}}.RELEASE_DATES rd USING (MOVIE_ID)
@@ -34,7 +34,7 @@ WHERE m.MOVIE_ID NOT IN (SELECT MOVIE_ID FROM {{SANDBOX_DB}}.{{SCHEMA}}.REMOVE_F
 ## Step 1 — Refresh, per film (order matters)
 1. **Validate release date** against a second reference (Source D) — do this first.
 2. `search-interest-normalize` — refresh Source A (entity ID must exist).
-3. `encyclopedia-pageviews` — refresh Source C.
+3. `research-pageviews` — refresh Source C.
 4. `comment-ingest-score` — refresh + score Source B.
 5. Rebuild `DEMAND_PERCENTILES` across the film set (A + C).
 6. For films now past release: `box-office-history` — fill/verify `OPENING_WEEKEND`.
