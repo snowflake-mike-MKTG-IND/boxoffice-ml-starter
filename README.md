@@ -2,7 +2,7 @@
 
 A hands-on starter kit for reproducing a piece of applied research: **can the organic conversation around a movie trailer predict its opening weekend better than the marketing metrics everyone already games?**
 
-This repo does **not** ship data, keys, or a finished model. It ships something more useful: a repeatable way to stand up the *pipeline* yourself, inside your own Snowflake account, guided end-to-end by **Cortex Code (CoCo)** — Snowflake's agentic desktop IDE.
+This repo will help you build repeatable way to stand up the *pipeline* yourself, inside your own Snowflake account, guided end-to-end by **Cortex Code (CoCo)** — Snowflake's agentic desktop IDE.
 
 You bring your own data access. The repo brings the method, the schema, the guardrails, and a set of CoCo prompts that walk you from an empty sandbox to a research-ready feature set.
 
