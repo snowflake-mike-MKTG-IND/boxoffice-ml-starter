@@ -61,21 +61,7 @@ SELECT
     IFF(intent_label = 'PASS',       1, 0)                                      AS PASS_INTENT
 FROM scored;
 
--- Option 2: fold BOTH signals into one structured call ------------------------
--- You can return sentiment + intent (and a short rationale) from a single TRY_COMPLETE by
--- widening the response_format schema, e.g.:
---   {"type":"object","properties":{
---       "sentiment":{"type":"string","enum":["positive","negative","neutral","mixed"]},
---       "intent":{"type":"string","enum":["THEATRICAL","STREAMING","PASS","NEUTRAL"]}},
---    "required":["sentiment","intent"]}
--- then read :structured_output[0]:raw_message:sentiment and :intent. One call per comment
--- instead of two — ask CoCo to generate that variant if you want to halve the token spend.
 
--- Per-film aggregate the feature view reads (sanity check):
---   SELECT MOVIE_ID,
---          COUNT(*)                                             AS comment_volume,
---          AVG(SENTIMENT_SCORE)                                 AS avg_sent,
---          100.0*AVG(THEATRICAL_INTENT)                         AS pct_theatrical,
 --          100.0*AVG(PASS_INTENT)                               AS pct_pass,
 --          100.0*(AVG(THEATRICAL_INTENT) - AVG(PASS_INTENT))    AS net_intent_pct
 --   FROM TRAILER_COMMENTS_SCORED GROUP BY MOVIE_ID;
