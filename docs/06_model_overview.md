@@ -39,6 +39,12 @@ On matched films under identical walk-forward validation, moving from the tier-c
 framing to a distributional one cut average error (MAPE) by a few points — concentrated in
 the **tail** (fewer large misses), with the typical/median error roughly unchanged.
 
+This is the short version. The full framework — the two blended learners, the
+residual-mixture distribution (HDR band / Bayes point / P78 upside), the demand-forward flag
+and point-lift, and the exact validation and flop-safety loss — is in
+**`docs/07_model_architecture.md`**, with a runnable reference implementation in
+**`model/train_ow_model.py`**.
+
 ## Pedigree belongs behind demand
 
 Static "pedigree" features (budget, star power, franchise history, a predecessor's gross)
@@ -53,7 +59,8 @@ Exclude any feature contaminated by post-announcement or post-release activity �
 
 ## Build it with CoCo
 
-> "Using `{{SANDBOX_DB}}.RESEARCH.OW_FEATURES`, build a walk-forward temporal backtest that
-> predicts log opening weekend, compares a tier-classifier baseline against a distributional
-> regressor on the **same** films and splits, and reports MAPE, median APE, and error in the
-> large-film tail."
+The full architecture and a copy-paste build/backtest prompt live in
+**`docs/07_model_architecture.md`** (reference implementation: `model/train_ow_model.py`).
+In short: point CoCo at `{{SANDBOX_DB}}.RESEARCH.OW_FEATURES`, run the walk-forward backtest,
+and compare the distributional regressor against a tier-classifier baseline on the **same**
+films and splits.
